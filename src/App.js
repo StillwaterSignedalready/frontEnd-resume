@@ -1,21 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import CoverPage from './CoverPage'
+import './App.css'
 
 class App extends React.Component{
 	state = {
-		pageNumbers: [1,2,3,4]
+		pageNumbers: [1,2,3,4],
+		currentPage: 1
 	}
 
 	render(){
-		return (
-			<div>
-				<li>diamond</li>
-				<li>diamond</li>
-				<li>diamond</li>
-				<li>diamond</li>
-				<li>diamond</li>
-			</div>
-		)
+		if(this.state.currentPage === 1){
+			return (
+				<div>
+					<CoverPage />
+				</div>
+			)
+		}
+
 	}
 }
 

@@ -1,19 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import './CoverPage.css'
+
 
 class CoverPage extends React.Component{
-	state = {
-		pageNumbers: [1,2,3,4]
-	}
 
 	render(){
 		return (
-			<div>
-				<li>diamond</li>
-				<li>diamond</li>
-				<li>diamond</li>
-				<li>diamond</li>
-				<li>diamond</li>
+			<div className="wrapper">
+				<div className="avatar"></div>
+				<h1>戴伟铭</h1>
+				<p>热爱数学物理与科技 | 自学能力强 | 博而专</p>
+				<h3>寻找一份前端开发的工作</h3>
+				<a href="https://github.com/StillwaterSignedalready">我的GitHub</a>
 			</div>
 		)
 	}
