@@ -41,7 +41,8 @@ class App extends React.Component{
 				description: 'that project'
 			},
 
-		]
+		],
+		skills: ['html5', 'css', 'JavaScript(es6)', 'PhotoShop', 'React.js', 'redux', 'knockout.js', 'jQuery', 'webpack', 'gulp', 'Adobe illustrator', '设计排版', 'AutoCAD', 'SketchUp']
 	}
 
 	filpPage = (event) => {
@@ -64,14 +65,16 @@ class App extends React.Component{
 		return 1;
 	}
 
-	pickPage(pageNumber){
-		switch(this.state.currentPage % 3){
+	pickPage(pageNumber, className){
+		switch(pageNumber % 3){
+			case -1:
+				return null;
 			case 0:
-				return <CoverPage />
+				return <CoverPage className={className} />
 			case 1:
-				return <ProjectPage projects={this.state.projects} />
+				return <ProjectPage className={className} projects={this.state.projects} />
 			case 2:
-				return <SkillsPage />
+				return <SkillsPage className={className} skills={this.state.skills} />
 		}
 	}
 
@@ -82,7 +85,13 @@ class App extends React.Component{
 	 * boolean是false是不动boolean，是true时toggle它
 	 */
 	render(){
-		return this.pickPage()
+		return (
+			<div>
+				{this.pickPage(this.state.currentPage - 1, 'previous-page')}
+				{this.pickPage(this.state.currentPage, 'current-page')}
+
+			</div>
+		)
 	}
 
 }

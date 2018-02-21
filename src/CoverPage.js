@@ -6,8 +6,10 @@ import ReactDOM from 'react-dom'
 class CoverPage extends React.Component{
 
 	render(){
+		let className = 'wrapper ' + (this.props.className || ' ')  ;
+		console.log(className);
 		return (
-			<div className="wrapper" onWheel={this.props.onScroll}>
+			<div className={className} onWheel={this.props.onScroll}>
 				<div className="avatar"></div>
 				<h1>戴伟铭</h1>
 				<p>热爱数学物理与科技 | 自学能力强 | 博而专</p>

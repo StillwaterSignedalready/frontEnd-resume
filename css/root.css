@@ -6,6 +6,7 @@ body{
 div.wrapper{
 	background-color: #41A5CA;
 	position: fixed;
+	height: 100%;
 	left: 0;
 	right: 0;
 	top: 0;
@@ -103,4 +104,27 @@ li.project{
 	li.project{
 		width: 100%;
 	}
+}
+
+h1.skills-title{
+	margin-top: 150px;
+}
+
+div.skill-bar{
+	text-align: center;
+	margin: 21px;
+}
+
+span.skill{
+	margin: 6px;
+	background-color: #36829D;
+	padding: 6px;
+	color: white;
+}
+
+div.previous-page{
+	margin-top: -60%;
+	transition: margin-top 2s;
+	z-index: 1;
+	background-color: black;
 }
