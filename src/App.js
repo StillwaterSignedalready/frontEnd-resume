@@ -87,8 +87,8 @@ class App extends React.Component{
 	render(){
 		return (
 			<div>
-				{this.pickPage(this.state.currentPage - 1, 'previous-page')}
-				{this.pickPage(this.state.currentPage, 'current-page')}
+				{this.pickPage(this.state.currentPage - 1)}
+				{this.pickPage(this.state.currentPage)}
 
 			</div>
 		)
