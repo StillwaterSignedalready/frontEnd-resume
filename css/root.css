@@ -91,13 +91,26 @@ a.github{
 
 li.project{
 
-	border: 3px solid #66B8B9;
+	/*border: 3px solid #66B8B9;*/
 	text-decoration: none;
 
 	box-sizing: border-box;
 	width: 50%;
 	height: 110px;
 	float: left;
+	padding: 10px;
+}
+
+li.project a.project-name{
+	margin: 0;
+	text-align: left;
+	font-size: 1.8em;
+	width: 100%;
+}
+
+.project-description{
+	font-size: 1.2em;
+	color: #9FDFF6;
 }
 
 @media screen and (max-width: 520px){
@@ -126,5 +139,21 @@ div.previous-page{
 	margin-top: -100%;
 	transition: margin-top 1s;
 	z-index: 1;
+	background-color: #5CE9A9;
+}
+
+div.previous-page > *{
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+div.next-page{
+	margin-top: 100%;
+	transition: margin-top 1s;
+	z-index: 1;
 	background-color: #82EE67;
+}
+
+div.previous-page .github,div.next-page .github{
+	opacity: 0;
 }

@@ -8,37 +8,37 @@ import './App.css'
 
 class App extends React.Component{
 	state = {
-		currentPage: 0,
+		currentPage: 1,
 		projects: [
 			{
-				name: 'p1',
-				link: 'http-www.wayne.com',
-				description: 'that project'
+				name: 'myReads',
+				link: 'https://github.com/StillwaterSignedalready/uda-my-reads',
+				description: '用creat-react-app开发的书架应用'
 			},
 			{
-				name: 'p2',
-				link: 'http-www.wayne.com',
-				description: 'that project'
+				name: 'uda-map-app',
+				link: 'https://github.com/StillwaterSignedalready/uda-map-app',
+				description: '借助google map API开发，载入API的place库以抓取地点数据,使用框架knockout'
 			},
 			{
-				name: 'p3',
-				link: 'http-www.wayne.com',
-				description: 'that project'
+				name: 'Arcade-Game',
+				link: 'https://github.com/StillwaterSignedalready/Arcade-Game',
+				description: '用canvas再现青蛙过河游戏'
 			},
-						{
-				name: 'p4',
-				link: 'http-www.wayne.com',
-				description: 'that project'
+			{
+				name: 'Memory Game',
+				link: 'https://stillwatersignedalready.github.io/Memory-game-of-Udacity/',
+				description: '记忆翻卡游戏'
 			},
-						{
-				name: 'p5',
-				link: 'http-www.wayne.com',
-				description: 'that project'
+			{
+				name: 'demos_lab',
+				link: 'https://github.com/StillwaterSignedalready/demos_lab',
+				description: '只是用来存放实验品的仓库，其中有试验redux的demo'
 			},
-						{
-				name: 'p6',
-				link: 'http-www.wayne.com',
-				description: 'that project'
+			{
+				name: '其他',
+				link: '',
+				description: '另外存有一些百度前端技术学院的demo，暂时没怎么整理'
 			},
 
 		],
@@ -48,7 +48,7 @@ class App extends React.Component{
 	filpPage = (event) => {
 		console.log(this.state.currentPage);
 		if(event.deltaY > 0){
-			this.setState({currentPage: this.state.currentPage + 1});
+			this.setState({currentPage: (this.state.currentPage + 1) % 3});
 		}
 		if(event.deltaY < 0){
 			if(this.state.currentPage > 0){
@@ -85,11 +85,14 @@ class App extends React.Component{
 	 * boolean是false是不动boolean，是true时toggle它
 	 */
 	render(){
+		const classNames = ['previous-page','previous-page','previous-page'];
+		classNames[this.state.currentPage] = '';
+
 		return (
 			<div>
-				{this.pickPage(this.state.currentPage - 1)}
-				{this.pickPage(this.state.currentPage)}
-
+				<CoverPage className={classNames[0]} />
+				<ProjectPage className={classNames[1]} projects={this.state.projects} />
+				<SkillsPage className={classNames[2]} skills={this.state.skills} />
 			</div>
 		)
 	}

@@ -21,8 +21,9 @@ class SkillsPage extends React.Component{
 
 	render(){
 		const skills = JSON.parse(JSON.stringify(this.props.skills));
+		let className = 'wrapper ' + (this.props.className || ' ')  ;
 		return (
-			<div className="wrapper" onWheel={this.props.onScroll}>
+			<div className={className} onWheel={this.props.onScroll}>
 				<h1 className="skills-title">擅长技术</h1>
 				<div className="skill-bar">
 					{this.cutChunkOfArray(skills, 2).map(skillName => <span className="skill" key={skillName}>{skillName}</span>)}
