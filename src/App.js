@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+
 import CoverPage from './CoverPage'
 import ProjectPage from './ProjectPage'
 import SkillsPage from './SkillsPage'
@@ -8,7 +9,7 @@ import './App.css'
 
 class App extends React.Component{
 	state = {
-		currentPage: 1,
+		currentPage: 0,
 		projects: [
 			{
 				name: 'myReads',
@@ -22,7 +23,7 @@ class App extends React.Component{
 			},
 			{
 				name: 'Arcade-Game',
-				link: 'https://github.com/StillwaterSignedalready/Arcade-Game',
+				link: 'https://stillwatersignedalready.github.io/Arcade-Game/',
 				description: '用canvas再现青蛙过河游戏'
 			},
 			{
