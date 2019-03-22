@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import CoverPage from './CoverPage'
-import ProjectPage from './ProjectPage'
-import SkillsPage from './SkillsPage'
+import CoverPage from './CoverPage.jsx'
+import ProjectPage from './ProjectPage.jsx'
+import SkillsPage from './SkillsPage.jsx'
 
 import './App.css'
 
@@ -45,17 +45,21 @@ class App extends React.Component{
 		],
 		skills: ['html5', 'css', 'JavaScript(es6)', 'PhotoShop', 'React.js', 'redux', 'knockout.js', 'jQuery', 'webpack', 'gulp', 'Adobe illustrator', '设计排版', 'AutoCAD', 'SketchUp']
 	}
-
+  flipSwitch = true;
 	filpPage = (event) => {
-		console.log(this.state.currentPage);
-		if(event.deltaY > 0){
-			this.setState({currentPage: (this.state.currentPage + 1) % 3});
-		}
-		if(event.deltaY < 0){
-			if(this.state.currentPage > 0){
-				this.setState({currentPage: this.state.currentPage - 1});
-			}
-		}
+    if (this.flipSwitch) {
+      console.log(this.state.currentPage);
+      if(event.deltaY > 0){
+        this.setState({currentPage: (this.state.currentPage + 1) % 3});
+      }
+      if(event.deltaY < 0){
+        if(this.state.currentPage > 0){
+          this.setState({currentPage: this.state.currentPage - 1});
+        }
+      }
+      this.flipSwitch = false;
+      setTimeout(() => {this.flipSwitch = true;}, 1000);
+    }
 	}
 
 	componentDidMount(){
