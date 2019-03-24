@@ -1,107 +1,82 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-
+import React, { useState, useEffect, useRef } from 'react'
 import CoverPage from './CoverPage.jsx'
 import ProjectPage from './ProjectPage.jsx'
 import SkillsPage from './SkillsPage.jsx'
-
 import './App.css'
 
-class App extends React.Component{
-	state = {
-		currentPage: 0,
-		projects: [
-			{
-				name: 'myReads',
-				link: 'https://github.com/StillwaterSignedalready/uda-my-reads',
-				description: '用creat-react-app开发的书架应用'
-			},
-			{
-				name: 'uda-map-app',
-				link: 'https://github.com/StillwaterSignedalready/uda-map-app',
-				description: '借助google map API开发，载入API的place库以抓取地点数据,使用框架knockout'
-			},
-			{
-				name: 'Arcade-Game',
-				link: 'https://stillwatersignedalready.github.io/Arcade-Game/',
-				description: '用canvas再现青蛙过河游戏'
-			},
-			{
-				name: 'Memory Game',
-				link: 'https://stillwatersignedalready.github.io/Memory-game-of-Udacity/',
-				description: '记忆翻卡游戏'
-			},
-			{
-				name: 'demos_lab',
-				link: 'https://github.com/StillwaterSignedalready/demos_lab',
-				description: '只是用来存放实验品的仓库，其中有试验redux的demo'
-			},
-			{
-				name: '其他',
-				link: '',
-				description: '另外存有一些百度前端技术学院的demo，暂时没怎么整理'
-			},
+/**
+ * @readonly
+ * @type {{name:string, link:string, description:string}[]} */
+const projects = [
+  {
+    name: 'demos_lab',
+    link: 'https://github.com/StillwaterSignedalready/demos_lab',
+    description: '实验室,内容有:算法(各种排序+)、node.js、typescript'
+  },
+  {
+    name: 'myReads',
+    link: 'https://github.com/StillwaterSignedalready/uda-my-reads',
+    description: '用creat-react-app开发的书架应用'
+  },
+  {
+    name: 'uda-map-app',
+    link: 'https://github.com/StillwaterSignedalready/uda-map-app',
+    description: '借助google map API开发，载入API的place库以抓取地点数据,使用框架knockout'
+  },
+  {
+    name: 'Arcade-Game',
+    link: 'https://stillwatersignedalready.github.io/Arcade-Game/',
+    description: '用canvas再现青蛙过河游戏'
+  },
+  {
+    name: 'Memory Game',
+    link: 'https://stillwatersignedalready.github.io/Memory-game-of-Udacity/',
+    description: '记忆翻卡游戏'
+  },
+  {
+    name: '其他',
+    link: '',
+    description: '另外存有一些百度前端技术学院的demo，暂时没怎么整理'
+  },
 
-		],
-		skills: ['html5', 'css', 'JavaScript(es6)', 'PhotoShop', 'React.js', 'redux', 'knockout.js', 'jQuery', 'webpack', 'gulp', 'Adobe illustrator', '设计排版', 'AutoCAD', 'SketchUp']
-	}
-  flipSwitch = true;
-	filpPage = (event) => {
-    if (this.flipSwitch) {
-      console.log(this.state.currentPage);
-      if(event.deltaY > 0){
-        this.setState({currentPage: (this.state.currentPage + 1) % 3});
-      }
-      if(event.deltaY < 0){
-        if(this.state.currentPage > 0){
-          this.setState({currentPage: this.state.currentPage - 1});
+];
+/** @readonly */
+const skills = ['html', 'css', 'JavaScript(es6+)', 'PhotoShop', 'React.js', 'redux', 'jQuery', 'webpack', 'node(koa)', 'Adobe illustrator', '设计排版', 'mysql', '计算机组成原理', '其他后端语言']
+/** @readonly */
+const pageCount = 3;
+
+function App () {
+  const [currPage, setCurrPage] = useState(0)
+  const classNames = Array(pageCount).fill('previous-page');
+  const flipSwitch = useRef(true)
+  classNames[currPage] = '';
+  useEffect(() => {
+    console.log('add listenner!')
+    const wheelListener = event => {
+      if (flipSwitch.current) {
+        if(event.deltaY > 0){
+          setCurrPage((currPage + 1) % pageCount);
         }
+        if(event.deltaY < 0){
+          if(currPage > 0){
+            setCurrPage(currPage - 1)
+          }
+        }
+        flipSwitch.current = false;
+        setTimeout(() => {flipSwitch.current = true;}, 1000);
       }
-      this.flipSwitch = false;
-      setTimeout(() => {this.flipSwitch = true;}, 1000);
-    }
-	}
-
-	componentDidMount(){
-		window.addEventListener('wheel', this.filpPage);
-	}
-
-	judgeClassName(){
-		return 1;
-	}
-
-	pickPage(pageNumber, className){
-		switch(pageNumber % 3){
-			case -1:
-				return null;
-			case 0:
-				return <CoverPage className={className} />
-			case 1:
-				return <ProjectPage className={className} projects={this.state.projects} />
-			case 2:
-				return <SkillsPage className={className} skills={this.state.skills} />
-		}
-	}
-
-	/**
-	 * 可模拟一个Queue，return 过去，现在，将来三个页面
-	 * 翻页效果间隔时间：设置一个boolean值，翻页需要先if(boolean)，
-	 * 翻页是设置为false，setTimeout(复位true,一秒)
-	 * boolean是false是不动boolean，是true时toggle它
-	 */
-	render(){
-		const classNames = ['previous-page','previous-page','previous-page'];
-		classNames[this.state.currentPage] = '';
-
-		return (
-			<div>
-				<CoverPage className={classNames[0]} />
-				<ProjectPage className={classNames[1]} projects={this.state.projects} />
-				<SkillsPage className={classNames[2]} skills={this.state.skills} />
-			</div>
-		)
-	}
-
+    };
+    window.addEventListener('wheel', wheelListener);
+    // 在下次更新 hook前运行return的函数
+    return () => {console.log('rm listenner!'),window.removeEventListener('wheel', wheelListener)}
+  }, [currPage]);
+  return (
+    <div>
+      <CoverPage className={classNames[0]} />
+      <ProjectPage className={classNames[1]} projects={projects} />
+      <SkillsPage className={classNames[2]} skills={skills} />
+    </div>
+  )
 }
 
 export default App

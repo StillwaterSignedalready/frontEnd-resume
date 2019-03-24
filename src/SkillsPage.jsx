@@ -14,7 +14,8 @@ class SkillsPage extends React.Component{
 	cutChunkOfArray(array, size){
 		let newArray = [];
 		for(let i = 0; i < size; i ++){
-			newArray.push(array.shift());
+			const item = array.shift();
+			item && newArray.push(item);
 		}
 		return newArray;
 	}
