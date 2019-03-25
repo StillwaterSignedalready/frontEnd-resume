@@ -1,6 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-// import './ProjectPage.css'
 
 function ProjectPage(props) {
   const projects = props.projects;

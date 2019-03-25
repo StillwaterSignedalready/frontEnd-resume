@@ -1,50 +1,46 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 // import './CoverPage.css'
 
+/** @typedef {string[]} stringList */
 
-class SkillsPage extends React.Component{
+/**
+ * @param {stringList} array 
+ * @param {number} size 
+ * @return {stringList}
+ */
+const cutChunkOfArray = (array, size) => {
+  let newArray = [];
+  for(let i = 0; i < size; i ++){
+    const item = array.shift();
+    item && newArray.push(item);
+  }
+  return newArray;
+}
 
-	/**
-	 * 这应该是个纯函数，否则不可持续
-	 * @param  {Array} array [description]
-	 * @param  {Number} size  [description]
-	 * @return {Array}       [description]
-	 */
-	cutChunkOfArray(array, size){
-		let newArray = [];
-		for(let i = 0; i < size; i ++){
-			const item = array.shift();
-			item && newArray.push(item);
-		}
-		return newArray;
-	}
-
-	render(){
-		const skills = JSON.parse(JSON.stringify(this.props.skills));
-		let className = 'wrapper ' + (this.props.className || ' ')  ;
+/** @param {{skills:stringList,stringList:string}} props */
+function SkillsPage (props) {
+  const skills = JSON.parse(JSON.stringify(props.skills));
+		let className = 'wrapper ' + (props.className || ' ')  ;
 		return (
-			<div className={className} onWheel={this.props.onScroll}>
+			<div className={className} >
 				<h1 className="skills-title">擅长技术</h1>
 				<div className="skill-bar">
-					{this.cutChunkOfArray(skills, 2).map(skillName => <span className="skill" key={skillName}>{skillName}</span>)}
+					{cutChunkOfArray(skills, 2).map(skillName => <span className="skill" key={skillName}>{skillName}</span>)}
 				</div>
 				<div className="skill-bar">
-					{this.cutChunkOfArray(skills, 5).map(skillName => <span className="skill" key={skillName}>{skillName}</span>)}
+					{cutChunkOfArray(skills, 5).map(skillName => <span className="skill" key={skillName}>{skillName}</span>)}
 				</div>
 				<div className="skill-bar">
-					{this.cutChunkOfArray(skills, 3).map(skillName => <span className="skill" key={skillName}>{skillName}</span>)}
+					{cutChunkOfArray(skills, 3).map(skillName => <span className="skill" key={skillName}>{skillName}</span>)}
 				</div>
 				<div className="skill-bar">
-					{this.cutChunkOfArray(skills, 2).map(skillName => <span className="skill" key={skillName}>{skillName}</span>)}
+					{cutChunkOfArray(skills, 2).map(skillName => <span className="skill" key={skillName}>{skillName}</span>)}
 				</div>
 				<div className="skill-bar">
-					{this.cutChunkOfArray(skills, 2).map(skillName => <span className="skill" key={skillName}>{skillName}</span>)}
+					{cutChunkOfArray(skills, 2).map(skillName => <span className="skill" key={skillName}>{skillName}</span>)}
 				</div>
-
 			</div>
 		)
-	}
 }
 
 export default SkillsPage

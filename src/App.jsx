@@ -35,13 +35,13 @@ const projects = [
   },
   {
     name: '其他',
-    link: '',
-    description: '另外存有一些百度前端技术学院的demo，暂时没怎么整理'
+    link: 'https://github.com/StillwaterSignedalready?tab=repositories',
+    description: ''
   },
 
 ];
 /** @readonly */
-const skills = ['html', 'css', 'JavaScript(es6+)', 'PhotoShop', 'React.js', 'redux', 'jQuery', 'webpack', 'node(koa)', 'Adobe illustrator', '设计排版', 'mysql', '计算机组成原理', '其他后端语言']
+const skills = ['html', 'css', 'JavaScript(es6+)', 'PhotoShop', 'React.js', 'redux', 'jQuery', 'webpack', 'node(koa)', 'vue.js', '设计排版', 'mysql', '计算机组成原理', '其他后端语言']
 /** @readonly */
 const pageCount = 3;
 
